@@ -10,7 +10,7 @@ public class Module implements SchoolEntities {
     @Column(name = "id")
     private long id;
     private String name;
-    @Column(length = 5000)
+    @Lob
     private String description;
     @ManyToOne()
     private Course course;

@@ -2,6 +2,7 @@ package be.ledio.schoolAdmin.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 public class Exam implements SchoolEntities {
@@ -10,13 +11,20 @@ public class Exam implements SchoolEntities {
     @Column(name = "id")
     private long id;
     private String name;
-    @Column(length = 5000)
+    @Lob
     private String description;
     private LocalDate date;
     private int weight;
     private int total;
     @ManyToOne()
     private Module module;
+    @Transient
+    @OneToMany(mappedBy = "exam")
+    private Grade grade;
+    @OneToMany(mappedBy = "subExams")
+    private Exam examGroup;
+    @ManyToOne()
+    private Collection<Exam> subExams;
 
     public long getId() {
         return id;
@@ -72,6 +80,22 @@ public class Exam implements SchoolEntities {
 
     public void setModule(Module module) {
         this.module = module;
+    }
+
+    public Exam getExamGroup() {
+        return examGroup;
+    }
+
+    public void setExamGroup(Exam examGroup) {
+        this.examGroup = examGroup;
+    }
+
+    public Collection<Exam> getSubExams() {
+        return subExams;
+    }
+
+    public void setSubExams(Collection<Exam> subExams) {
+        this.subExams = subExams;
     }
 
     @Override

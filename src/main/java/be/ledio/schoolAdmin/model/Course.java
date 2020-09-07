@@ -10,9 +10,10 @@ public class Course implements SchoolEntities {
     @Column(name = "id")
     private long id;
     private String name;
-    @Column(length = 5000)
+    @Lob
     private String description;
     private String imageURL;
+    private String code;
     private boolean active;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "module_id")
@@ -50,6 +51,14 @@ public class Course implements SchoolEntities {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public boolean isActive() {

@@ -1,6 +1,7 @@
 package be.ledio.schoolAdmin.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Person implements SchoolEntities {
@@ -17,6 +18,9 @@ public class Person implements SchoolEntities {
     @Transient
     @OneToOne(mappedBy = "person")
     private User user;
+    private Collection<Course> courseHistory;
+    @OneToMany(mappedBy = "person")
+    private Grade grade;
 
 
     public long getId() {
@@ -65,6 +69,14 @@ public class Person implements SchoolEntities {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Collection<Course> getCourseHistory() {
+        return courseHistory;
+    }
+
+    public void setCourseHistory(Collection<Course> courseHistory) {
+        this.courseHistory = courseHistory;
     }
 
     @Override
